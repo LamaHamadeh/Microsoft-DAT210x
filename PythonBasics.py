@@ -9,7 +9,7 @@ Created on Fri Nov 25 11:43:18 2016
 Data wrangling information listed here has been taken mostly from Chris Albon's website: chrisAlbon.com
 '''
 
-'''
+
 #Numpy Array Basics
 import numpy as np
 # Create a list
@@ -37,8 +37,8 @@ civilian_deaths.min()
 # Largest value in the array
 civilian_deaths.max()
 #------------------------------------------------------------------------------
-'''
-'''
+
+
 #Indexing And Slicing Numpy Arrays
 import numpy as np
 # Create a 2x2 array
@@ -53,7 +53,7 @@ print(deaths[:, 1])
 # Select the second row
 print(deaths[1, :])
 #------------------------------------------------------------------------------
-'''
+
 
 #Pandas Dataframes
 import pandas as pd
@@ -66,7 +66,7 @@ data = {'name': ['Jason', 'Molly', 'Tina', 'Jake', 'Amy'],
         'coverage': [25, 94, 57, 62, 70]} #python arange the columns alphabetically
 df = pd.DataFrame(data, index = ['Cochice', 'Pima', 'Santa Cruz', 'Maricopa', 'Yuma'])#without the index there will be an index column starting from 0
 #print(df) 
-'''
+
 #Applying A Function Over A Dataframe
 #Create a function that multiplies all non-strings by 100
 # create a function called times100
@@ -97,7 +97,7 @@ df=df.T
 #To see a descriptive statistical summary of your dataframe's numeric columns
 df.describe()
 #----------------
-'''
+
 
 #Rows
 #drop a single row
