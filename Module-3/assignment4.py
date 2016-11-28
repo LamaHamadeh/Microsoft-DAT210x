@@ -20,7 +20,7 @@ wheat_dataset=pd.read_csv('/Users/ADB3HAMADL/Desktop/Anaconda_Packages/DAT210x-m
 # 
 # .. your code here .
 
-wheat_dataset = wheat_dataset.reset_index(drop=True)
+wheat_dataset = wheat_dataset.reset_index(drop=True) #deleting 'id' column
 
 New_wheat_dataset=wheat_dataset.drop(['area', 'perimeter'], axis=1) #deleting columns by labels
 
