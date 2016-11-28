@@ -3,6 +3,8 @@
 Spyder Editor
 
 Authot: Lama Hamadeh 28/11/2016
+
+This file is to create a 6-D parallel coordinate chart for x=[0, 2pi] and the relations with its sin, cos, tan, exp, sqrt and sqruare values.
 """
 
 import pandas as pd
