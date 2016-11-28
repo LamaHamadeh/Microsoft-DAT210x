@@ -19,40 +19,21 @@ matplotlib.style.use('ggplot')
 
 
 
-x=np.arange(0,math.pi*2,0.1)
+x=np.arange(0,math.pi*2,math.pi/40)
 #print(x)
 #print(math.pi)
 
 
-Sinx=pd.Series(np.sin(x))
-#print(Sinx)
-
-Cosx=pd.Series(np.cos(x))
-#print(Cosx)
-
-Tanx=pd.Series(np.tan(x))
-#print(Tanx)
-
-Expx=pd.Series(np.exp(x))
-#print(Expx)
-
-Squarex=pd.Series(x**2)
-#print(Squarex)
-
-Sqrtx=pd.Series(np.sqrt(x))
-#print(Sqrtx)
-
-
-data = {'-x':[x], 
-        'x':[-x],
-        'Sin(x)': [Sinx],
-        'Cos(x)': [Cosx],
-        'Tan(x)': [Tanx],
-        'exp(x)': [Expx],
-        'Square(x)': [Squarex],
-        'Sqrt(x)': [Sqrtx]} #python arange the columns alphabetically
+data = {'-x':x, 
+        'x':-x,
+        'Sin(x)':np.sin(x),
+        'Cos(x)': np.cos(x),
+        'Tan(x)': np.tan(x),
+        'exp(x)': np.exp(x),
+        'Square(x)': x*x,
+        'Sqrt(x)': np.sqrt(x)} #python arange the columns alphabetically
 df = pd.DataFrame(data, index=None) #without the index there will be an index column starting from 0
-#print(df) 
+print(df) 
 
 '''
 plt.scatter(x,Sinx)
