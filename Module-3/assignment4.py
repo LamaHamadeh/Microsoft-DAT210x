@@ -20,18 +20,11 @@ wheat_dataset=pd.read_csv('/Users/ADB3HAMADL/Desktop/Anaconda_Packages/DAT210x-m
 # 
 # .. your code here .
 
+wheat_dataset = wheat_dataset.reset_index(drop=True)
+
+New_wheat_dataset=wheat_dataset.drop(['area', 'perimeter'], axis=1) #deleting columns by labels
+
 #New_wheat_dataset=wheat_dataset.drop(wheat_dataset.columns[[0,1]], axis=1) #deleting columns by indeices
-'''
-wheat_dataset.set_index('id', inplace=True)
-
-wheat_dataset = wheat_dataset.rename_axis(None)
-
-
-New_wheat_dataset=wheat_dataset.drop(['area', 'perimeter'], axis=1) #deleting columns by labels
-
-print(New_wheat_dataset)
-'''
-New_wheat_dataset=wheat_dataset.drop(['area', 'perimeter'], axis=1) #deleting columns by labels
 #
 # TODO: Plot a parallel coordinates chart grouped by
 # the 'wheat_type' feature. Be sure to set the optional
