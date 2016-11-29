@@ -21,9 +21,8 @@ matplotlib.style.use('ggplot')
 
 x=np.arange(0,np.pi*2,np.pi/40)
 #print(x)
-#print(math.pi)
 
-
+#Constructing dataframe
 data = {'x':x, 
         '-x':-x,
         'Sin(x)':np.sin(x),
