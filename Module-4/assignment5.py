@@ -40,20 +40,6 @@ for ALOI32 in os.listdir('/Users/ADB3HAMADL/Desktop/Anaconda_Packages/DAT210x-ma
 print len(samples)
 
 
-for ALOI32i in os.listdir('/Users/ADB3HAMADL/Desktop/Anaconda_Packages/DAT210x-master/Module4/Datasets/ALOI/32'):
-	b = os.path.join('Datasets/ALOI/32', ALOI32i)
-	img2 = misc.imread(b).reshape(-1)
-	samples.append(img2)
-print len(samples)
-
-#create a colur python list where.
-#Store a 'b' in it for each element you load from the /32/ directory, 
-#and an 'r' for each element you load from the '32_i' directory. 
-#Then pass this variable to your 2D and 3D scatter plots, as an optional parameter c=colors
-# .. your code here .. 
-
-
-
 #
 # TODO: Once you're done answering the first three questions,
 # right before you converted your list to a dataframe, add in
@@ -62,6 +48,19 @@ print len(samples)
 # assignment and answer the final question below.
 #
 # .. your code here .. 
+for ALOI32i in os.listdir('/Users/ADB3HAMADL/Desktop/Anaconda_Packages/DAT210x-master/Module4/Datasets/ALOI/32'):
+	b = os.path.join('Datasets/ALOI/32', ALOI32i)
+	img2 = misc.imread(b).reshape(-1)
+	samples.append(img2)
+print len(samples)
+
+
+#create a colur python list where.
+#Store a 'b' in it for each element you load from the /32/ directory, 
+#and an 'r' for each element you load from the '32_i' directory. 
+#Then pass this variable to your 2D and 3D scatter plots, as an optional parameter c=colors
+# .. your code here .. 
+
 
 
 #
