@@ -48,8 +48,8 @@ print len(samples)
 # assignment and answer the final question below.
 #
 # .. your code here .. 
-for ALOI32i in os.listdir('/Users/ADB3HAMADL/Desktop/Anaconda_Packages/DAT210x-master/Module4/Datasets/ALOI/32'):
-	b = os.path.join('Datasets/ALOI/32', ALOI32i)
+for ALOI32i in os.listdir('/Users/ADB3HAMADL/Desktop/Anaconda_Packages/DAT210x-master/Module4/Datasets/ALOI/32i'):
+	b = os.path.join('Datasets/ALOI/32i', ALOI32i)
 	img2 = misc.imread(b).reshape(-1)
 	samples.append(img2)
 print len(samples)
