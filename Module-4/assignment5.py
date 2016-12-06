@@ -61,7 +61,11 @@ print len(samples)
 #Then pass this variable to your 2D and 3D scatter plots, as an optional parameter c=colors
 # .. your code here .. 
 
-
+colours=[]
+for i in os.listdir('/Users/ADB3HAMADL/Desktop/Anaconda_Packages/DAT210x-master/Module4/Datasets/ALOI/32'):
+    colours.append('b')
+for j in os.listdir('/Users/ADB3HAMADL/Desktop/Anaconda_Packages/DAT210x-master/Module4/Datasets/ALOI/32i'):
+    colours.append('r')
 
 #
 # TODO: Convert the list to a dataframe
@@ -98,7 +102,7 @@ def Plot2D(T, title, x, y, num_to_plot=40):
   ax.set_ylabel('Component: {0}'.format(y))
   x_size = (max(T[:,x]) - min(T[:,x])) * 0.08
   y_size = (max(T[:,y]) - min(T[:,y])) * 0.08
-  ax.scatter(T[:,x],T[:,y], marker='.',alpha=0.7)
+  ax.scatter(T[:,x],T[:,y], marker='.',alpha=0.7,c=colours)
 
 Plot2D(T, 'Isomap 2D', 0, 1, num_to_plot=40)
 
@@ -118,7 +122,7 @@ def Plot3D(T, title, x, y, z):
   x_size = (max(T[:,x]) - min(T[:,x])) * 0.08
   y_size = (max(T[:,y]) - min(T[:,y])) * 0.08
   z_size = (max(T[:,z]) - min(T[:,z])) * 0.08
-  ax.scatter(T[:,x],T[:,y],T[:,z], marker='.', alpha=0.7)
+  ax.scatter(T[:,x],T[:,y],T[:,z], marker='.', alpha=0.7,c=colours)
 
 Plot3D(T, "Isomap 3D", 0, 1, 2)
 
