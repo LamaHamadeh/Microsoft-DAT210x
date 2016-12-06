@@ -107,7 +107,7 @@ Plot2D(T, 'Isomap 2D', 0, 1, num_to_plot=40)
 # can use either 'o' or '.' as your marker:
 #
 # .. your code here .. 
-'''
+
 def Plot3D(T, title, x, y, z):
   fig = plt.figure()
   ax = fig.add_subplot(111, projection = '3d')
@@ -118,9 +118,9 @@ def Plot3D(T, title, x, y, z):
   x_size = (max(T[:,x]) - min(T[:,x])) * 0.08
   y_size = (max(T[:,y]) - min(T[:,y])) * 0.08
   z_size = (max(T[:,z]) - min(T[:,z])) * 0.08
-  ax.scatter(T[:,x],T[:,y],T[:,z], marker='.', alpha=0.65)
+  ax.scatter(T[:,x],T[:,y],T[:,z], marker='.', alpha=0.7)
 
 Plot3D(T, "Isomap 3D", 0, 1, 2)
-'''
+
 plt.show()
 
