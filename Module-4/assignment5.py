@@ -135,3 +135,6 @@ The basic for Isomap algorithm steps are:
 2. Compute all-pairs shortest paths on the above neighborhood graph.
 3. Run multidimensional scaling (i.e., isomap) using the matrix of shortest-path distances.
 '''
+#Geodetic Data Management Feature measures distance between two points along a geodesic. 
+#A geodesic is the shortest path between two points on the ellipsoidal shape of the Earth, 
+#and this shortest path might not follow a line of constant latitude even though the two end points are at the same latitude.
