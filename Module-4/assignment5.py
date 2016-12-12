@@ -128,3 +128,10 @@ Plot3D(T, "Isomap 3D", 0, 1, 2)
 
 plt.show()
 
+
+'''
+The basic for Isomap algorithm steps are:
+1. For each object, find a small set of neighboring objects and their distances.
+2. Compute all-pairs shortest paths on the above neighborhood graph.
+3. Run multidimensional scaling (i.e., isomap) using the matrix of shortest-path distances.
+'''
