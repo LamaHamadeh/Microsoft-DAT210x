@@ -5,12 +5,13 @@ import matplotlib
 
 matplotlib.style.use('ggplot') # Look Pretty
 
+'''
 def showandtell(title=None):
   if title != None: 
      plt.savefig(title + ".png", bbox_inches='tight', dpi=300)
   plt.show()
   exit()
-
+'''
 
 #
 # INFO: This dataset has call records for 10 users tracked over the course of 3 years.
@@ -41,6 +42,7 @@ print(df.dtypes)
 
 in_numbers = list(df.In.unique()) #distinct == unique
 print(in_numbers)
+print(len(in_numbers))
 
 
 # 
@@ -55,7 +57,7 @@ print(user1)
 
 # INFO: Plot all the call locations
 user1.plot.scatter(x='TowerLon', y='TowerLat', c='red', alpha=0.1, title='Call Locations', s = 30)
-showandtell()  # Comment this line out when you're ready to proceed
+#showandtell()  # Comment this line out when you're ready to proceed
 
 
 #
@@ -157,7 +159,28 @@ ax.scatter(centroids[:,0], centroids[:,1], marker='x', c='red', alpha=0.9, linew
 #
 # .. your code here ..
 
+locations = []
+for i in range(10):
+	user = df[(df.In == in_numbers[i])]
+	user.plot.scatter(x='TowerLon', y='TowerLat', c='purple', alpha=0.12, title='Call Locations', s = 30)
+	user = user[(user.DOW == 'Sat') | (user.DOW == 'Sun')]
+	user = user[(user.CallTime < "06:00:00") | (user.CallTime > "22:00:00")]
+	fig = plt.figure()
+	ax = fig.add_subplot(111)
+	ax.scatter(user.TowerLon, user.TowerLat, c='g', marker='o', alpha=0.2)
+	ax.set_title('Weekend Calls (<6am or >10p)')
+	kmeans = KMeans(n_clusters = 2)
+	user = user[['TowerLon','TowerLat']]
+	labels=kmeans.fit_predict(user)
 
-
+	centroids = kmeans.cluster_centers_
+	ax.scatter(x = centroids[:, 0], y = centroids[:, 1], c = 'r', marker = 'x', alpha=0.9, linewidths=3, s=250)
+	locations.append(centroids)
 
 plt.show()
+
+
+
+#the way you search in Google Maps is that you sould put the latitude (y) first and then the longitude (x) and both of them are separated
+#by a comma. The decimal places in the longitude and latidute values are separated but dots ot commas.
+#Make sure that the latitude values are in the range of [-90, 90] and the longitude values are in the range of [-180, 180].
