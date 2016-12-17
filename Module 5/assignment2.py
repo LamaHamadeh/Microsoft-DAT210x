@@ -43,6 +43,7 @@ print(df.dtypes)
 in_numbers = list(df.In.unique()) #distinct == unique
 print(in_numbers)
 print(len(in_numbers))
+print(type(in_numbers)) #list
 
 
 # 
