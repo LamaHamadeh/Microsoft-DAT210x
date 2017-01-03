@@ -125,10 +125,9 @@ X.nuclei.fillna(X.nuclei.mean(), inplace = True)
 # .. your code here ..
 
 from sklearn import preprocessing
-T = preprocessing.normalize(X)
+T = X #Having no normalising to the data values at all
 
 #We can use also MaxAbsScaler(), MinMaxScaler(), StandardScaler(), Normalizer(), RobustScaler() as other preprocessing methods
-#or nothing at all
 #IMPORTANT NOTE
 #Just because you know _how_ to perform preprocessing scaling doesn't mandate it become a required step for every machine 
 #learning dataset. In the breast cancer dataset, from the description, it seems like all the data is already standardized 
