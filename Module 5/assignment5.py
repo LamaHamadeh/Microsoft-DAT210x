@@ -66,6 +66,7 @@ y=X['wheat_type'].copy()
 
 X.drop(labels = ['id', 'wheat_type'], inplace = True, axis = 1)
 #------------------------------------
+
 # TODO: Do a quick, "ordinal" conversion of 'y'. In actuality our
 # classification isn't ordinal, but just as an experiment...
 #
@@ -108,6 +109,7 @@ X.groove.fillna(X.groove.mean(), inplace = True)
 #
 # .. your code here ..
 
+T = preprocessing.normalize(X)
 pca = PCA(n_components = 2)
 pca_X = pca.fit_transform(T)
 
@@ -126,20 +128,7 @@ from sklearn.cross_validation import train_test_split
 X_train, X_test, y_train, y_test = train_test_split(pca_X, y, test_size = 0.33, random_state = 1)
 #We use X_train and y_train for training (fit), and use X_test and y_test for predicting or scoring.
 ##------------------------------------ 
-# TODO: Create an instance of SKLearn's Normalizer class and then train it
-# using its .fit() method against your *training* data.
-#
-# NOTE: The reason you only fit against your training data is because in a
-# real-world situation, you'll only have your training data to train with!
-# In this lab setting, you have both train+test data; but in the wild,
-# you'll only have your training data, and then unlabeled data you want to
-# apply your models to.
-#
-# .. your code here ..
 
-T = preprocessing.normalize(X)
-
-#------------------------------------
 #
 # TODO: Create and train a KNeighborsClassifier. Start with K=9 neighbors.
 # NOTE: Be sure train your classifier against the pre-processed, PCA-
