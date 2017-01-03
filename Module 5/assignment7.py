@@ -127,13 +127,13 @@ X.nuclei.fillna(X.nuclei.mean(), inplace = True)
 from sklearn import preprocessing
 T = preprocessing.normalize(X)
 
-#T = preprocessing.StandardScaler().fit_transform(X)
-#T = preprocessing.MinMaxScaler().fit_transform(X)
-#T = preprocessing.MaxAbsScaler().fit_transform(X)
-#T = preprocessing.Normalizer().fit_transform(X)
-#T = preprocessing.RobustScaler().fit_transform(X)
-#nothing at all
-
+#We can use also MaxAbsScaler(), MinMaxScaler(), StandardScaler(), Normalizer(), RobustScaler() as other preprocessing methods
+#or nothing at all
+#IMPORTANT NOTE
+#Just because you know _how_ to perform preprocessing scaling doesn't mandate it become a required step for every machine 
+#learning dataset. In the breast cancer dataset, from the description, it seems like all the data is already standardized 
+#from 1-10 (ints), so no further preprocessing is required. In fact, attempting to do so further brings down the predictive accuracy!
+#therefore, we still can use non of these methods and we get a correct approximation at the end.
 #------------------------------------
 #
 # PCA and Isomap are your new best friends
