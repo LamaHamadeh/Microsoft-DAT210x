@@ -35,7 +35,7 @@ import scipy.io.wavfile as wavfile
 # TODO: Play with this. This is how much of the audio file will
 # be provided, in percent. The remaining percent of the file will
 # be generated via linear extrapolation.
-Provided_Portion = 0.25
+Provided_Portion = 0.25 #How much will kep from the recording
 
 
 
