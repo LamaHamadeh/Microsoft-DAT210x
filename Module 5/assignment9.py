@@ -154,8 +154,8 @@ print len(slice1), len(Accepted) #they have the same length = 777
 # be clear to you that your output will be the accepted students, and your input will be the amount charged for room and board.
 
 #NOTE2
-#since train_test_split can only handle DataFrames, not Series, and as the column of the number of accepted students is the input in our case
-#then it has to be converted to dataframe not series. However, slice2 doesn;t have to be converted.
+#since train_test_split can only handle DataFrames, not Series, and as the column of the amount charged for room and board is the input in our case
+#then it has to be converted to dataframe not series.
 
 #TODO: convert slice1 to dataframe instead of series
 slice1 = slice1.to_frame()
