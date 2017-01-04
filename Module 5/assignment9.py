@@ -132,6 +132,9 @@ model = linear_model.LinearRegression()
 # number of accepted students, as a function of the amount
 # charged for room and board.
 
+#let us plot the data so we can see it's structure.
+X.plot(x='Room.Board', y='Accept', kind='scatter')
+
 #
 # TODO: Using indexing, create two slices (series). One will just
 # store the room and board column, the other will store the accepted
