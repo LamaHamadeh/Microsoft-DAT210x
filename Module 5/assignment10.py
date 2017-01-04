@@ -125,7 +125,7 @@ random_idx = rng.randint(zero.shape[0])
 test  = zero[random_idx]
 train = np.delete(zero, [random_idx], axis=0)
 
-
+'''
 
 # 
 # TODO: Print out the shape of train, and the shape of test
