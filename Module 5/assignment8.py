@@ -35,20 +35,24 @@ def drawLine(model, X_test, y_test, title):
 #
 # .. your code here ..
 
-X = pd.read_csv('/Users/Admin/Desktop/DAT210x/DAT210x-master/Module5/Datasets/life_expectancy.csv')
-
+X = pd.read_csv('/Users/Admin/Desktop/DAT210x/DAT210x-master/Module5/Datasets/life_expectancy.csv', delim_whitespace = True)
+#without the 'delim_whitespace=True' it can be seen that the dataframe columns are separated by tabs (\t). therefore, this command 
+#is addaed to treat the columns properly.
 print X.describe()
 print X
+
 #------------------------------------
-'''
 #
 # TODO: Create your linear regression model here and store it in a
 # variable called 'model'. Don't actually train or do anything else
 # with it yet:
 #
 # .. your code here ..
+from sklearn import linear_model
 
+model = linear_model.LinearRegression()
 
+#------------------------------------
 
 #
 # TODO: Slice out your data manually (e.g. don't use train_test_split,
@@ -60,7 +64,21 @@ print X
 #
 # .. your code here ..
 
+X_train = X.Year[X.Year < 1986]
+y_train_WM = X.WhiteMale[X.Year < 1986]
 
+print type(y_train_WM), type(X_train) # y_train_WM and X_train are Series, as described below; need to convert X_train to DataFrame
+
+print len(X_train), len(y_train_WM) # X_train and y_train_WM are the same length = 11
+
+X_train = X_train.to_frame()
+
+print type(y_train_WM), type(X_train)
+
+# X_train is a DataFrame
+# y_train_WM is a Series
+
+#------------------------------------
 
 #
 # TODO: Train your model then pass it into drawLine with your training
@@ -72,6 +90,10 @@ print X
 #
 # .. your code here ..
 
+model.fit(X_train, y_train_WM)
+drawLine(model, X_train, y_train_WM, "WhiteMale")
+
+#------------------------------------
 
 #
 # TODO: Print the actual 2014 WhiteMale life expectancy from your
@@ -79,7 +101,10 @@ print X
 #
 # .. your code here ..
 
-
+print "Actual 2014 WhiteMale life expectancy from loaded dataset:", X.WhiteMale[(X.Year == 2014)].values[0]
+                                                                                
+                                                                                
+#------------------------------------
 
 # 
 # TODO: Repeat the process, but instead of for WhiteMale, this time
@@ -89,9 +114,19 @@ print X
 #
 # .. your code here ..
 
+y_train_BF = X.BlackFemale[X.Year < 1986]
+print type(y_train_BF)
+
+model.fit(X_train, y_train_BF)
+
+drawLine(model, X_train, y_train_BF, "BlackFemale")
+
+print "Actual 2014 BlackFemales life expectancy from loaded dataset:", X.BlackFemale[(X.Year == 2014)].values[0]
 
 
+#------------------------------------
 #
+
 # TODO: Lastly, print out a correlation matrix for your entire
 # dataset, and display a visualization of the correlation
 # matrix, just as we described in the visualization section of
@@ -99,8 +134,20 @@ print X
 #
 # .. your code here ..
 
-plt.show()
+print X.corr()
 
+
+plt.imshow(X.corr(), cmap=plt.cm.Blues, interpolation='nearest')
+plt.colorbar()
+tick_marks = [i for i in range(len(X.columns))]
+plt.xticks(tick_marks, X.columns, rotation='vertical')
+plt.yticks(tick_marks, X.columns)
+
+
+
+#------------------------------------
+
+plt.show()
 
 
 
@@ -136,4 +183,4 @@ plt.show()
 # SKLearn expects your data to be arranged as [n_samples, n_features].
 # Keep in mind, all of the above only relates to your "X" or input
 # data, and does not apply to your "y" or labels.
-'''
+
