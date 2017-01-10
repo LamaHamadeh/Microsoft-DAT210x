@@ -3,9 +3,6 @@ import pandas as pd
 
 import scipy.io.wavfile as wavfile
 
-#Hasn't finsihed yet! Still working on it!
-
-
 # Good Luck!
 
 #
@@ -33,19 +30,11 @@ import scipy.io.wavfile as wavfile
 
 
 
-
 #
 # TODO: Play with this. This is how much of the audio file will
 # be provided, in percent. The remaining percent of the file will
 # be generated via linear extrapolation.
-Provided_Portion = 0.25 #How much will kep from the recording
-
-
-
-# INFO: You have to download the dataset (audio files) from the website:
-# https://github.com/Jakobovski/free-spoken-digit-dataset
-
-
+Provided_Portion = 0.25
 
 #
 # TODO: Create a regular ol' Python List called 'zero'
@@ -54,20 +43,19 @@ Provided_Portion = 0.25 #How much will kep from the recording
 # just the data!) to your Python list 'zero':
 #
 # .. your code here ..
-
 zero = []
 
 import os
-for file in os.listdir('Datasets/free-spoken-digit-dataset-master/recordings'):
+for file in os.listdir('/Users/Admin/Desktop/LAMA/DAT210x/DAT210x-master/Module5/Datasets/free-spoken-digit-dataset-master/recordings'):
     if file.startswith('0_jackson'):
-        a = os.path.join('Datasets/free-spoken-digit-dataset-master/recordings', file)
+        a = os.path.join('/Users/Admin/Desktop/LAMA/DAT210x/DAT210x-master/Module5/Datasets/free-spoken-digit-dataset-master/recordings', file)
         sample_rate, audio_data = wavfile.read(a)
         zero.append(audio_data)
-print (len(zero)) # 50, as expected since there 50 files in the folder starting with "0_jackson"
+print len(zero) # 50, as expected since there 50 files in the folder starting with "0_jackson"
+#note that if the recordings can be denoted as n_jackson, then it can be seen that for each label, n, there are 50 files.
+# in other words, there are 50 takes of each clip
 
-#--------------------------------
-
-# 
+#
 # TODO: Just for a second, convert zero into a DataFrame. When you do
 # so, set the dtype to np.int16, since the input audio files are 16
 # bits per sample. If you don't know how to do this, read up on the docs
@@ -76,19 +64,16 @@ print (len(zero)) # 50, as expected since there 50 files in the folder starting 
 #
 # Since these audio clips are unfortunately not length-normalized,
 # we're going to have to just hard chop them to all be the same length.
-# Since Pandas would have inserted NANs at any spot to make zero a 
+# Since Pandas would have inserted NANs at any spot to make zero a
 # perfectly rectangular [n_observed_samples, n_audio_samples] array,
-# do a dropna on the Y axis here. Then, convert one back into an
+# do a dropna on the Y axis here. Then, convert it back into an
 # NDArray using .values
 #
 # .. your code here ..
-
 zero = pd.DataFrame(data = zero, dtype = np.int16)
 zero.dropna(axis = 1, inplace = True)
 zero = zero.values
-print (type(zero)) # zero is now a numpy NDArray
-
-#--------------------------------
+print type(zero) # zero is now a numpy NDArray
 
 #
 # TODO: It's important to know how (many audio_samples samples) long the
@@ -97,12 +82,8 @@ print (type(zero)) # zero is now a numpy NDArray
 # n_audio_samples
 #
 # .. your code here ..
-
 n_audio_samples = zero.shape[1]
-print (n_audio_samples) #4087
-
-
-#--------------------------------
+print n_audio_samples #4087
 
 #
 # TODO: Create your linear regression model here and store it in a
@@ -110,11 +91,8 @@ print (n_audio_samples) #4087
 # with it yet:
 #
 # .. your code here ..
-
 from sklearn import linear_model
 model = linear_model.LinearRegression()
-
-#--------------------------------
 
 #
 # INFO: There are 50 takes of each clip. You want to pull out just one
@@ -128,37 +106,30 @@ random_idx = rng.randint(zero.shape[0])
 test  = zero[random_idx]
 train = np.delete(zero, [random_idx], axis=0)
 
-'''
-
-# 
+#
 # TODO: Print out the shape of train, and the shape of test
 # train will be shaped: [n_samples, n_audio_samples], where
 # n_audio_samples are the 'features' of the audio file
-# train will be shaped [n_audio_features], since it is a single
+# test will be shaped [n_audio_features], since it is a single
 # sample (audio file, e.g. observation).
 #
 # .. your code here ..
-
-
+print "Shapes of train and test, respectively:", train.shape, test.shape
 
 #
 # INFO: The test data will have two parts, X_test and y_test. X_test is
 # going to be the first portion of the test audio file, which we will
 # be providing the computer as input. y_test, the "label" if you will,
-# is going to be the remaining portion of the audio file. Like such, 
+# is going to be the remaining portion of the audio file. Like such,
 # the computer will use linear regression to derive the missing
 # portion of the sound file based off of the training data its received!
 
-
-
 #
 # Save the original 'test' clip, the one you're about to delete
-# half of, so that you can compare it to the 'patched' clip once 
+# half of, so that you can compare it to the 'patched' clip once
 # you've generated it. HINT: you should have got the sample_rate
 # when you were loading up the .wav files:
 wavfile.write('Original Test Clip.wav', sample_rate, test)
-
-
 
 #
 # TODO: Prepare the TEST date by creating a slice called X_test. It
@@ -168,7 +139,7 @@ wavfile.write('Original Test Clip.wav', sample_rate, test)
 # n_audio_samples audio features from test and store it in X_test.
 #
 # .. your code here ..
-
+X_test = test[:int(Provided_Portion*n_audio_samples)]
 
 #
 # TODO: If the first Provided_Portion * n_audio_samples features were
@@ -178,29 +149,27 @@ wavfile.write('Original Test Clip.wav', sample_rate, test)
 # in completing the sound file.
 #
 # .. your code here ..
+y_test = test[int(Provided_Portion*n_audio_samples):]
 
-
-
-
-# 
+#
 # TODO: Duplicate the same process for X_train, y_train. The only
 # differences being: 1) Your will be getting your audio data from
 # 'train' instead of from 'test', 2) Remember the shape of train that
 # you printed out earlier? You want to do this slicing but for ALL
 # samples (observations). For each observation, you want to slice
 # the first Provided_Portion * n_audio_samples audio features into
-# X_train, and the remaining go into y_test. All of this should be
+# X_train, and the remaining go into y_train. All of this should be
 # accomplishable using regular indexing in two lines of code.
 #
 # .. your code here ..
+X_train = train[:, :int(Provided_Portion*n_audio_samples)]
+y_train = train[:, int(Provided_Portion*n_audio_samples):]
 
-
-
-# 
-# TODO: SciKit-Learn gets mad if you don't supply your training
+#
+# TODO: SciKit-Learn gets mad if you don't supply your training or testing
 # data in the form of a 2D arrays: [n_samples, n_features].
 #
-# So if you only have one SAMPLE, such as is our case with X_test, 
+# So if you only have one SAMPLE, such as is our case with X_test,
 # and y_test, then by calling .reshape(1, -1), you can turn
 # [n_features] into [1, n_features].
 #
@@ -209,34 +178,33 @@ wavfile.write('Original Test Clip.wav', sample_rate, test)
 # [n_samples] into [n_samples, 1]:
 #
 # .. your code here ..
-
+X_test = X_test.reshape(1, -1)
+y_test = y_test.reshape(1, -1)
 
 #
 # TODO: Fit your model using your training data and label:
 #
 # .. your code here ..
+model.fit(X_train, y_train)
 
-
-# 
+#
 # TODO: Use your model to predict the 'label' of X_test. Store the
 # resulting prediction in a variable called y_test_prediction
 #
 # .. your code here ..
-
+y_test_prediction = model.predict(X_test)
 
 # INFO: SciKit-Learn will use float64 to generate your predictions
 # so let's take those values back to int16:
 y_test_prediction = y_test_prediction.astype(dtype=np.int16)
 
-
-
-# 
+#
 # TODO: Score how well your prediction would do for some good laughs,
 # by passing in your test data and test label (y_test).
 #
 # .. your code here ..
+score = model.score(X_test, y_test)
 print "Extrapolation R^2 Score: ", score
-
 
 #
 # First, take the first Provided_Portion portion of the test clip, the
@@ -246,9 +214,5 @@ print "Extrapolation R^2 Score: ", score
 completed_clip = np.hstack((X_test, y_test_prediction))
 wavfile.write('Extrapolated Clip.wav', sample_rate, completed_clip[0])
 
-
-
 #
 # INFO: Congrats on making it to the end of this crazy lab =) !
-#
-'''
