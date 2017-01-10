@@ -3,6 +3,9 @@ import pandas as pd
 
 import scipy.io.wavfile as wavfile
 
+#Hasn't finsihed yet! Still working on it!
+
+
 # Good Luck!
 
 #
