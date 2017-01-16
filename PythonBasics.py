@@ -170,10 +170,12 @@ print(df)
 import numpy as np
 import matplotlib.pyplot as plt
 
-x = np.linspace(0, 10, 20)
+x = np.linspace(0, 10, 20)#we can use logspace instead of linespace but we have to be careful as the starting and the ending point must 
+#be the logarithmic values of the original start and end points.
 y1 = x**2.0
 y2 = x**1.5
-plt.plot(x, y1, 'bo-', linewidth = 2, markersize = 12, label = 'First')
+plt.plot(x, y1, 'bo-', linewidth = 2, markersize = 12, label = 'First')#instead of plot we can use loglog function where the values on
+#x axis and y axis are the logarithmic values.
 plt.plot(x, y2, 'gs-', linewidth = 2, markersize = 12, label = 'Second')
 plt.xlabel('$X$') #matplotlibe support LaTex typsetting 
 plt.ylabel('$Y$')
