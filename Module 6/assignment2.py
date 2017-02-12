@@ -155,7 +155,7 @@ plt.imshow(X_test.ix[1000, :].reshape(8, 8), cmap = plt.cm.gray_r, interpolation
 # and change your SVC's kernel to 'poly' and re-run your lab
 # again.
 
-#NO
+#NO (the score is: 0.961024498886)
 
 #
 # TODO: Were you able to beat the USPS advertised accuracy score
@@ -164,7 +164,7 @@ plt.imshow(X_test.ix[1000, :].reshape(8, 8), cmap = plt.cm.gray_r, interpolation
 # and change your SVC's kernel to 'rbf' and re-run your lab
 # again.
 
-#NO
+#NO (the score is: 0.974944320713)
 
 #
 # TODO: Were you able to beat the USPS advertised accuracy score
@@ -174,7 +174,7 @@ plt.imshow(X_test.ix[1000, :].reshape(8, 8), cmap = plt.cm.gray_r, interpolation
 # to beat the USPS. Don't stop tinkering until you do. =).
 
     
-#YES the accuracy (score) is: 0.982739420935
+#YES (the score is: 0.982739420935)!
 
 #################################################
 
