@@ -49,5 +49,10 @@ model.fit(X_train, y_train)
 score = model.score(X_test, y_test)
 print(score)
 
+#That accuracy was just too low to be useful. We need to get it up. 
+#One way you could go about doing that would be to manually try a bunch of combinations of C, 
+#and gamma values for your rbf kernel. But that could literally take forever. 
+#Also, you might unknowingly skip a pair of values that would have resulted in a very good accuracy.
+
 
 
