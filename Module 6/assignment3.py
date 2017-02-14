@@ -1,17 +1,17 @@
+
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
 Created on Sun Feb 12 21:34:08 2017
-
 @author: lamahamadeh
 """
-
-import pandas as pd
 
 #TODO Load up the /Module6/Datasets/parkinsons.data data set into a variable X, 
 #being sure to drop the name column.
 
-X = pd.read_csv('/Users/lamahamadeh/Downloads/Modules/DAT210x-master/Module6/Datasets/parkinsons.data')
+import pandas as pd
+
+X = pd.read_csv('/Users/Admin/Desktop/LAMA/DAT210x/DAT210x-master/Module6/Datasets/parkinsons.data')
 X.drop('name', axis = 1, inplace = True)
 
 print (X.head())
@@ -47,13 +47,13 @@ from sklearn.svm import SVC
 model = SVC()
 model.fit(X_train, y_train)
 score = model.score(X_test, y_test)
-print(score)
+print(score) #0.813559322034
 
 #That accuracy was just too low to be useful. We need to get it up. 
-#One way you could go about doing that would be to manually try a bunch of combinations of C, 
-#and gamma values for your rbf kernel. But that could literally take forever. 
-#Also, you might unknowingly skip a pair of values that would have resulted in a very good accuracy.
-
+#One way you could go about doing that would be to manually try a bunch of 
+#combinations of C, and gamma values for your rbf kernel. 
+#But that could literally take forever. Also, you might unknowingly skip 
+#a pair of values that would have resulted in a very good accuracy.
 
 #Instead, lets get the computer to do what computers do best. 
 #Program a naive, best-parameter search by creating nested for-loops. 
@@ -68,6 +68,49 @@ print(score)
 #If the current best_score is less than the model's score, update the best_score being sure to print it out, 
 #along with the C and gamma values that resulted in it.
 
+import numpy as np
+
+''' 
+=====
+NOTE:
+=====
+# for float interval we can use np.arange as following:
+for i in np.arange(start,stop,step):
+    print i
+#-------------------------------------
+ 
+#or we can define afunction that does the same thing as:
+def MakeRange(start,stop,step):
+    i = 0
+    while start + i * step < stop:
+        yield start + i * step
+        i += 1
+                
+for i in MakeRange(start,stop,step):
+    print i #the results are numbers not a list
+'''
+
+best_score = 0
+
+for i in np.arange(start = 0.05, stop = 2, step = 0.05): #variable C from 0.05 to 2, using 0.05 unit increments
+    for j in np.arange(start = 0.001, stop = 0.1, step = 0.001): #Tvariable gamma from 0.001 to 0.1, using 0.001 unit increments
+        #creating a SVC model
+        model = SVC(C = i, gamma = j)
+        #training the data
+        model.fit(X_train, y_train)
+        # TODO: Calculate the score of your SVC against the testing data
+        score = model.score(X_test, y_test)
+        if score > best_score:
+            best_score = score
+            best_C = model.C
+            best_gamma = model.gamma
+print ("The highest score obtained:", best_score) #0.9152542372881356
+print ("C value:", best_C) #1.65
+print ("gamma value:", best_gamma) #0.005
+
+
+      
 
 
 
+    
