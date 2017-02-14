@@ -55,4 +55,19 @@ print(score)
 #Also, you might unknowingly skip a pair of values that would have resulted in a very good accuracy.
 
 
+#Instead, lets get the computer to do what computers do best. 
+#Program a naive, best-parameter search by creating nested for-loops. 
+#The outer for-loop should iterate a variable C from 0.05 to 2, using 0.05 unit increments. 
+#The inner for-loop should increment a variable gamma from 0.001 to 0.1, using 0.001 unit increments. 
+#As you know, Python ranges won't allow for float intervals, so you'll have to do some research on NumPy ARanges, 
+#if you don't already know how to use them.
+
+#Since the goal is to find the parameters that result in the model having the best accuracy score, 
+#you'll need a best_score = 0 variable that you initialize outside of the for-loops. Inside the inner for-loop, 
+#create an SVC model and pass in the C and gamma parameters its class constructor. Train and score the model appropriately. 
+#If the current best_score is less than the model's score, update the best_score being sure to print it out, 
+#along with the C and gamma values that resulted in it.
+
+
+
 
