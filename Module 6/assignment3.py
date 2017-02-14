@@ -104,7 +104,7 @@ for i in np.arange(start = 0.05, stop = 2, step = 0.05): #variable C from 0.05 t
             best_score = score
             best_C = model.C
             best_gamma = model.gamma
-print ("The highest score obtained:", best_score) #0.9152542372881356
+print ("The highest score obtained:", best_score) #0.915254237288
 print ("C value:", best_C) #1.65
 print ("gamma value:", best_gamma) #0.005
 
