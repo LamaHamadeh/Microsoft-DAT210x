@@ -49,20 +49,22 @@ model.fit(X_train, y_train)
 score = model.score(X_test, y_test)
 print(score) #0.813559322034
 
+#-----------------------------------------------------------------------------------------
+
 #That accuracy was just too low to be useful. We need to get it up. 
 #One way you could go about doing that would be to manually try a bunch of 
 #combinations of C, and gamma values for your rbf kernel. 
 #But that could literally take forever. Also, you might unknowingly skip 
 #a pair of values that would have resulted in a very good accuracy.
 
-#Instead, lets get the computer to do what computers do best. 
+#TODO Instead, lets get the computer to do what computers do best. 
 #Program a naive, best-parameter search by creating nested for-loops. 
 #The outer for-loop should iterate a variable C from 0.05 to 2, using 0.05 unit increments. 
 #The inner for-loop should increment a variable gamma from 0.001 to 0.1, using 0.001 unit increments. 
 #As you know, Python ranges won't allow for float intervals, so you'll have to do some research on NumPy ARanges, 
 #if you don't already know how to use them.
 
-#Since the goal is to find the parameters that result in the model having the best accuracy score, 
+#TODO Since the goal is to find the parameters that result in the model having the best accuracy score, 
 #you'll need a best_score = 0 variable that you initialize outside of the for-loops. Inside the inner for-loop, 
 #create an SVC model and pass in the C and gamma parameters its class constructor. Train and score the model appropriately. 
 #If the current best_score is less than the model's score, update the best_score being sure to print it out, 
@@ -108,9 +110,28 @@ print ("The highest score obtained:", best_score) #0.915254237288
 print ("C value:", best_C) #1.65
 print ("gamma value:", best_gamma) #0.005
 
+#-----------------------------------------------------------------------------------------
 
-      
+#Wait a second. Pull open the dataset's label file from: https://archive.ics.uci.edu/ml/datasets/Parkinsons
+
+#Look at the units on those columns: Hz, %, Abs, dB, etc. What happened to transforming your data? 
+#With all of those units interacting with one another, some pre-processing is surely in order.
+
+#Right after you preform the train/test split but before you train your model, inject SciKit-Learn's pre-processing code. 
+#Unless you have a good idea which one is going to work best, you're going to have to try the various pre-processors one at a time, 
+#checking to see if they improve your predictive accuracy.
+
+#Experiment with Normalizer(), MaxAbsScaler(), MinMaxScaler(), KernelCenterer(), and StandardScaler().
 
 
 
-    
+#-----------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+#-----------------------------------------------------------------------------------------
