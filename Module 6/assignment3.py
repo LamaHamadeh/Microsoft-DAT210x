@@ -123,7 +123,14 @@ print ("gamma value:", best_gamma) #0.005
 
 #Experiment with Normalizer(), MaxAbsScaler(), MinMaxScaler(), KernelCenterer(), and StandardScaler().
 
+from sklearn import preprocessing
 
+T = preprocessing.Normalizer().fit_transform(X)
+#T = preprocessing.MaxAbsScaler().fit_transform(X)
+#T = preprocessing.MinMaxScaler().fit_transform(X)
+#T = preprocessing.KernelCenterer().fit_transform(X)
+#T = preprocessing.StandardScaler().fit_transform(X)
+#T = X # No Change
 
 #-----------------------------------------------------------------------------------------
 
