@@ -58,12 +58,12 @@ X.drop('status', axis = 1, inplace = True)
 
 from sklearn import preprocessing
 
-#T = preprocessing.Normalizer().fit_transform(X) #0.79661016949152541 the **lowest** accuracy
-#T = preprocessing.MaxAbsScaler().fit_transform(X) #0.88135593220338981
-#T = preprocessing.MinMaxScaler().fit_transform(X) #0.88135593220338981
-#T = preprocessing.KernelCenterer().fit_transform(X) #0.9152542372881356
-#T = preprocessing.StandardScaler().fit_transform(X) #this gives the **highets** accuracy 0.93220338983050843 with C = 1.55 and gamma = 0.097.
-T = X #No preprocessing used
+#T = preprocessing.Normalizer().fit_transform(X) #this gives the **lowest** accuracy
+#T = preprocessing.MaxAbsScaler().fit_transform(X) 
+#T = preprocessing.MinMaxScaler().fit_transform(X) 
+#T = preprocessing.KernelCenterer().fit_transform(X) 
+T = preprocessing.StandardScaler().fit_transform(X) #this gives the **highets** accuracy 
+#T = X #No preprocessing used
 
 #-----------------------------------------------------------------------------------------
 #=================
@@ -78,18 +78,23 @@ T = X #No preprocessing used
 #Well, let's try to get rid of some useless features. Immediately after you do the pre-processing, 
 #run PCA on your dataset. The original dataset has 22 columns and 1 label column. So try experimenting 
 #with PCA n_component values between 4 and 14. Are you able to get a better accuracy?
-
+'''
 from sklearn.decomposition import PCA
-pca = PCA(n_components = 14)
+pca = PCA(n_components = 14) #n_component values between 4 and 14 
 XPca = pca.fit_transform(T)
-
+'''
+#In case of using PCA, train/test split becomes:
+#X_train, X_test, y_train, y_test = train_test_split(XPca, y, test_size = 0.30, random_state = 7)
 
 #In the same spot, run Isomap on the data. Manually experiment with every inclusive combination 
 #of n_neighbors between 2 and 5, and n_components between 4 and 6. Are you able to get a better accuracy?
-
+'''
 from sklearn.manifold import Isomap
-iso = Isomap(n_neighbors=8, n_components=3)
+iso = Isomap(n_neighbors=5, n_components=6) #n_neighbors between 2 and 5/n_components between 4 and 6
 XIso = iso.fit_transform(T)
+'''
+#In case of using Isomap, train/test split becomes:
+#X_train, X_test, y_train, y_test = train_test_split(XIso, y, test_size = 0.30, random_state = 7)
 
 #-----------------------------------------------------------------------------------------
 #=======================
@@ -98,8 +103,7 @@ XIso = iso.fit_transform(T)
 #TODO Perform a train/test split. 30% test group size, with a random_state equal to 7.
 
 from sklearn.cross_validation import train_test_split
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.30, random_state = 7)
-
+X_train, X_test, y_train, y_test = train_test_split(T, y, test_size = 0.30, random_state = 7)
 
 #TODO Create a SVC classifier. Don't specify any parameters, just leave everything as default. 
 #Fit it against your training data and then score your testing data.
@@ -108,7 +112,7 @@ from sklearn.svm import SVC
 model = SVC()
 model.fit(X_train, y_train)
 score = model.score(X_test, y_test)
-print(score) #0.813559322034
+print(score) 
 
 #-----------------------------------------------------------------------------------------
 #==============
@@ -169,10 +173,9 @@ for i in np.arange(start = 0.05, stop = 2, step = 0.05): #variable C from 0.05 t
             best_score = score
             best_C = model.C
             best_gamma = model.gamma
-print ("The highest score obtained:", best_score) #0.915254237288
-print ("C value:", best_C) #1.65
-print ("gamma value:", best_gamma) #0.005
-
+print ("The highest score obtained:", best_score) 
+print ("C value:", best_C) 
+print ("gamma value:", best_gamma) 
 #-----------------------------------------------------------------------------------------
 
 
