@@ -4,6 +4,8 @@
 Created on Sun Feb 12 21:34:08 2017
 @author: lamahamadeh
 """
+#*** This assignment is intentionally organised as follwos based on lab instructions***
+#-----------------------------------------------------------------------------------------
 #-----------------------------------------------------------------------------------------
 #==============
 #First Question
@@ -90,9 +92,9 @@ iso = Isomap(n_neighbors=8, n_components=3)
 XIso = iso.fit_transform(T)
 
 #-----------------------------------------------------------------------------------------
-#==============
-#First Question
-#==============
+#=======================
+#Continue First Question
+#=======================
 #TODO Perform a train/test split. 30% test group size, with a random_state equal to 7.
 
 from sklearn.cross_validation import train_test_split
