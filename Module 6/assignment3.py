@@ -1,11 +1,13 @@
-
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
 Created on Sun Feb 12 21:34:08 2017
 @author: lamahamadeh
 """
-
+#-----------------------------------------------------------------------------------------
+#==============
+#First Question
+#==============
 #TODO Load up the /Module6/Datasets/parkinsons.data data set into a variable X, 
 #being sure to drop the name column.
 
@@ -34,6 +36,37 @@ print (X.dtypes)
 y = X['status'].copy()
 X.drop('status', axis = 1, inplace = True)
 
+#-----------------------------------------------------------------------------------------
+#==============
+#Third Question
+#==============
+
+#Wait a second. Pull open the dataset's label file from: https://archive.ics.uci.edu/ml/datasets/Parkinsons
+
+#Look at the units on those columns: Hz, %, Abs, dB, etc. What happened to transforming your data? 
+#With all of those units interacting with one another, some pre-processing is surely in order.
+
+#Right after you preform the train/test split but before you train your model, inject SciKit-Learn's pre-processing code. 
+#Unless you have a good idea which one is going to work best, you're going to have to try the various pre-processors one at a time, 
+#checking to see if they improve your predictive accuracy.
+
+#Experiment with Normalizer(), MaxAbsScaler(), MinMaxScaler(), KernelCenterer(), and StandardScaler().
+#in this case: the splitting would take the form: 
+#X_train, X_test, y_train, y_test = train_test_split(T, y, test_size = 0.30, random_state = 7) instaed of X
+
+from sklearn import preprocessing
+
+#T = preprocessing.Normalizer().fit_transform(X) #0.79661016949152541 the **lowest** accuracy
+#T = preprocessing.MaxAbsScaler().fit_transform(X) #0.88135593220338981
+#T = preprocessing.MinMaxScaler().fit_transform(X) #0.88135593220338981
+#T = preprocessing.KernelCenterer().fit_transform(X) #0.9152542372881356
+#T = preprocessing.StandardScaler().fit_transform(X) #this gives the **highets** accuracy 0.93220338983050843 with C = 1.55 and gamma = 0.097.
+T = X #No preprocessing method is used
+
+#-----------------------------------------------------------------------------------------
+#=======================
+#Continue First Question
+#=======================
 #TODO Perform a train/test split. 30% test group size, with a random_state equal to 7.
 
 from sklearn.cross_validation import train_test_split
@@ -50,7 +83,9 @@ score = model.score(X_test, y_test)
 print(score) #0.813559322034
 
 #-----------------------------------------------------------------------------------------
-
+#==============
+#Second Question
+#==============
 #That accuracy was just too low to be useful. We need to get it up. 
 #One way you could go about doing that would be to manually try a bunch of 
 #combinations of C, and gamma values for your rbf kernel. 
@@ -112,33 +147,3 @@ print ("gamma value:", best_gamma) #0.005
 
 #-----------------------------------------------------------------------------------------
 
-#Wait a second. Pull open the dataset's label file from: https://archive.ics.uci.edu/ml/datasets/Parkinsons
-
-#Look at the units on those columns: Hz, %, Abs, dB, etc. What happened to transforming your data? 
-#With all of those units interacting with one another, some pre-processing is surely in order.
-
-#Right after you preform the train/test split but before you train your model, inject SciKit-Learn's pre-processing code. 
-#Unless you have a good idea which one is going to work best, you're going to have to try the various pre-processors one at a time, 
-#checking to see if they improve your predictive accuracy.
-
-#Experiment with Normalizer(), MaxAbsScaler(), MinMaxScaler(), KernelCenterer(), and StandardScaler().
-
-from sklearn import preprocessing
-
-T = preprocessing.Normalizer().fit_transform(X)
-#T = preprocessing.MaxAbsScaler().fit_transform(X)
-#T = preprocessing.MinMaxScaler().fit_transform(X)
-#T = preprocessing.KernelCenterer().fit_transform(X)
-#T = preprocessing.StandardScaler().fit_transform(X)
-#T = X # No Change
-
-#-----------------------------------------------------------------------------------------
-
-
-
-
-
-
-
-
-#-----------------------------------------------------------------------------------------
