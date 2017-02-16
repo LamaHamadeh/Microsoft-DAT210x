@@ -46,8 +46,7 @@ X.drop('status', axis = 1, inplace = True)
 #Look at the units on those columns: Hz, %, Abs, dB, etc. What happened to transforming your data? 
 #With all of those units interacting with one another, some pre-processing is surely in order.
 
-#Right after you splice out the 'status' column from X, but before
-# you process the train/test split, inject SciKit-Learn pre-processing code. 
+#Right after you preform the train/test split but before you train your model, inject SciKit-Learn's pre-processing code. 
 #Unless you have a good idea which one is going to work best, you're going to have to try the various pre-processors one at a time, 
 #checking to see if they improve your predictive accuracy.
 
@@ -62,12 +61,38 @@ from sklearn import preprocessing
 #T = preprocessing.MinMaxScaler().fit_transform(X) #0.88135593220338981
 #T = preprocessing.KernelCenterer().fit_transform(X) #0.9152542372881356
 #T = preprocessing.StandardScaler().fit_transform(X) #this gives the **highets** accuracy 0.93220338983050843 with C = 1.55 and gamma = 0.097.
-T = X #No preprocessing method is used
+T = X #No preprocessing used
 
 #-----------------------------------------------------------------------------------------
-#=======================
-#Continue First Question
-#=======================
+#=================
+#Fourth Question
+#=================
+
+#The accuracy score keeps creeping upwards. Let's have one more go at it. 
+#Remember how in a previous lab we discovered that SVM's are a bit sensitive to outliers and that just 
+#throwing all of our unfiltered, dirty or noisy data at it, particularly in high-dimensionality space, 
+#can actually cause the accuracy score to suffer?
+
+#Well, let's try to get rid of some useless features. Immediately after you do the pre-processing, 
+#run PCA on your dataset. The original dataset has 22 columns and 1 label column. So try experimenting 
+#with PCA n_component values between 4 and 14. Are you able to get a better accuracy?
+
+from sklearn.decomposition import PCA
+pca = PCA(n_components = 14)
+XPca = pca.fit_transform(T)
+
+
+#In the same spot, run Isomap on the data. Manually experiment with every inclusive combination 
+#of n_neighbors between 2 and 5, and n_components between 4 and 6. Are you able to get a better accuracy?
+
+from sklearn.manifold import Isomap
+iso = Isomap(n_neighbors=8, n_components=3)
+XIso = iso.fit_transform(T)
+
+#-----------------------------------------------------------------------------------------
+#==============
+#First Question
+#==============
 #TODO Perform a train/test split. 30% test group size, with a random_state equal to 7.
 
 from sklearn.cross_validation import train_test_split
@@ -147,4 +172,6 @@ print ("C value:", best_C) #1.65
 print ("gamma value:", best_gamma) #0.005
 
 #-----------------------------------------------------------------------------------------
+
+
 
