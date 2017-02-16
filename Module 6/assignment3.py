@@ -46,7 +46,8 @@ X.drop('status', axis = 1, inplace = True)
 #Look at the units on those columns: Hz, %, Abs, dB, etc. What happened to transforming your data? 
 #With all of those units interacting with one another, some pre-processing is surely in order.
 
-#Right after you preform the train/test split but before you train your model, inject SciKit-Learn's pre-processing code. 
+#Right after you splice out the 'status' column from X, but before
+# you process the train/test split, inject SciKit-Learn pre-processing code. 
 #Unless you have a good idea which one is going to work best, you're going to have to try the various pre-processors one at a time, 
 #checking to see if they improve your predictive accuracy.
 
