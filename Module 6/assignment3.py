@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 Created on Sun Feb 12 21:34:08 2017
-@author: lamahamadeh
+@author: Lama Hamadeh
 """
 #*** This assignment is intentionally organised as follwos based on lab instructions***
 #-----------------------------------------------------------------------------------------
