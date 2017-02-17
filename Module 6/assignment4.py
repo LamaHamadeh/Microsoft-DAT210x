@@ -243,9 +243,3 @@ benchmark(DT, X_train, X_test, y_train, y_test, 'Decision Tree')
 drawPlots(DT, X_train, X_test, y_train, y_test, 'Decision Tree')
 
 plt.show()
-
-
-
-#
-# BONUS: After submitting your answers, toy around with
-# gamma, kernel, and C.
