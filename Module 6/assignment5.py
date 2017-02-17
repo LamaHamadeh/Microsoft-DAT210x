@@ -75,7 +75,7 @@ print "After dropping all rows with any NaNs, shape of X is:", X.shape
 # .. your code here ..
 
 
-'''
+
 #
 # TODO: Create an DT classifier. No need to set any parameters
 #
@@ -98,5 +98,5 @@ print "High-Dimensionality Score: ", round((score*100), 3)
 # If not, `brew install graphviz. If you can't, use: http://webgraphviz.com/
 #
 # .. your code here ..
-'''
+
 
