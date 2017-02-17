@@ -17,7 +17,7 @@ import pandas as pd
 #
 # .. your code here ..
 
-X = pd.read_csv('/Users/Admin/Desktop/LAMA/DAT210x/DAT210x-master/Module6/Datasets/agaricus-lepiota.data', na_values = '?')
+X = pd.read_csv('/Users/lamahamadeh/Downloads/Modules/DAT210x-master/Module6/Datasets/agaricus-lepiota.data', na_values = '?')
 #we use na_values='?' here to prevent pandas from interpreting 'NA' or 'N' as NaN (and vice versa) in a string and define 
 #the exact NANs in the dataset especially when your dataset contains string values
 
@@ -28,7 +28,7 @@ X.columns = ['classification', 'cap-shape', 'cap-surface', 'cap-color', 'bruises
 
 print(X.head(5))
 
-print "Before dropping all rows with any NaNs, shape of X is:", X.shape
+print ("Before dropping all rows with any NaNs, shape of X is:", X.shape)
 
 # INFO: An easy way to show which rows have nans in them
 #print X[pd.isnull(X).any(axis=1)]
@@ -40,15 +40,15 @@ def num_missing(x):
   return sum(x.isnull())
 
 #Applying per column:
-print "Missing values per column:"
-print X.apply(num_missing, axis=0) #axis=0 defines that function is to be applied on each column
+print ("Missing values per column:")
+print (X.apply(num_missing, axis=0)) #axis=0 defines that function is to be applied on each column
 
 # TODO: Go ahead and drop any row with a nan
 #
 # .. your code here ..
 X.dropna(axis = 0, how = 'any', inplace = True)
 
-print "After dropping all rows with any NaNs, shape of X is:", X.shape
+print ("After dropping all rows with any NaNs, shape of X is:", X.shape)
 
 
 #
@@ -94,7 +94,7 @@ DT = tree.DecisionTreeClassifier()
 
 DT.fit(X_train, y_train)
 score = DT.score(X_test, y_test)
-print "High-Dimensionality Score: ", round((score*100), 3)
+print ("High-Dimensionality Score: ", round((score*100), 3))
 
 
 #
@@ -104,9 +104,15 @@ print "High-Dimensionality Score: ", round((score*100), 3)
 #
 # .. your code here ..
 
-tree.export_graphviz(DT, out_file = 'tree.dot', feature_names = X.columns)
+tree.export_graphviz(DT.tree_, out_file = 'tree.dot', feature_names = X.columns)
 
-import subprocess
-subprocess.call(['dot', '-Tpdf', 'tree.dot', '-o' 'tree.pdf'])
+#Grpahviz can be downloaded from http://www.graphviz.org/Download_macos.php (choose any version)
+# Then on the terminal type:
+#pip install graphviz
+#brew install graphviz
+# This allows to install 'Homebrew' and all the dependencies that are related to graphviz.
 
-     
+# after running his code, a text (or sometimes word file) file is created inside Module 6 folder 
+# named tree.dot. This file contains the tree graph code that we need to extract.
+# copy this code and paste it in http://webgraphviz.com/. after pressing 'generate graph' we will get the 
+# tree graph that we need.
