@@ -17,15 +17,40 @@ import pandas as pd
 #
 # .. your code here ..
 
+X = pd.read_csv('/Users/Admin/Desktop/LAMA/DAT210x/DAT210x-master/Module6/Datasets/agaricus-lepiota.data', na_values = '?')
+#we use na_values='?' here to prevent pandas from interpreting 'NA' or 'N' as NaN (and vice versa) in a string and define 
+#the exact NANs in the dataset especially when your dataset contains string values
+
+X.columns = ['classification', 'cap-shape', 'cap-surface', 'cap-color', 'bruises?', 'odor', 'gill-attachment', 
+                'gill-spacing', 'gill-size', 'gill-color', 'stalk-shape', 'stalk-root', 'stalk-surface-above-ring', 
+                'stalk-surface-below-ring', 'stalk-color-above-ring', 'stalk-color-below-ring', 'veil-type', 'veil-color', 
+                'ring-number', 'ring-type', 'spore-print-color', 'population', 'habitat']
+
+print(X.head(5))
+
+print "Before dropping all rows with any NaNs, shape of X is:", X.shape
+
 # INFO: An easy way to show which rows have nans in them
 #print X[pd.isnull(X).any(axis=1)]
 
+#OR
 
-# 
+#check which column have nans values in order o apply .fillna
+def num_missing(x):
+  return sum(x.isnull())
+
+#Applying per column:
+print "Missing values per column:"
+print X.apply(num_missing, axis=0) #axis=0 defines that function is to be applied on each column
+
+print X.shape
+
 # TODO: Go ahead and drop any row with a nan
 #
 # .. your code here ..
-print X.shape
+X.dropna(axis = 0, how = 'any', inplace = True)
+
+print "After dropping all rows with any NaNs, shape of X is:", X.shape
 
 
 #
@@ -50,7 +75,7 @@ print X.shape
 # .. your code here ..
 
 
-
+'''
 #
 # TODO: Create an DT classifier. No need to set any parameters
 #
@@ -73,5 +98,5 @@ print "High-Dimensionality Score: ", round((score*100), 3)
 # If not, `brew install graphviz. If you can't, use: http://webgraphviz.com/
 #
 # .. your code here ..
-
+'''
 
