@@ -1,3 +1,7 @@
+'''
+author Lama Hamadeh
+'''
+
 import pandas as pd
 
 from scipy import misc
