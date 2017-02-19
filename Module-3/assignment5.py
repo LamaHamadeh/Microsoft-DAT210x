@@ -1,7 +1,6 @@
-#
-# This code is intentionally missing!
-# Read the directions on the course lab page!
-#
+'''
+author: Lama Hamadeh
+'''
 
 import pandas as pd
 import matplotlib.pyplot as plt
