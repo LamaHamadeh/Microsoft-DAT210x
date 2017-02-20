@@ -1,9 +1,7 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Mon Feb 20 11:22:46 2017
+'''
+author: Lama Hamadeh
+'''
 
-@author: Lama Hamadeh
-"""
 
 import pandas as pd
 import time
@@ -89,7 +87,7 @@ X.drop(['user','class'], axis = 1, inplace = True)
 
 print (X.describe())
 
-'''
+
 
 #
 # TODO: Create an RForest classifier 'model' and set n_estimators=30,
@@ -97,7 +95,8 @@ print (X.describe())
 #
 # .. your code here ..
 
-
+from sklearn.ensemble import RandomForestClassifier
+model = RandomForestClassifier(n_estimators=30, max_depth = 10, oob_score=True,  random_state=0)
 
 # 
 # TODO: Split your data into test / train sets
@@ -106,37 +105,40 @@ print (X.describe())
 #
 # .. your code here ..
 
+from sklearn.cross_validation import train_test_split
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.30, random_state = 7)
 
-
-
-
-print "Fitting..."
+print ("Fitting...")
 s = time.time()
+
+
 #
 # TODO: train your model on your training set
 #
 # .. your code here ..
-print "Fitting completed in: ", time.time() - s
+
+model = model.fit(X_train, y_train)
+print ("Fitting completed in: ", time.time() - s)
 
 
 #
 # INFO: Display the OOB Score of your data
 score = model.oob_score_
-print "OOB Score: ", round(score*100, 3)
+print ("OOB Score: ", round(score*100, 3))
 
-
-
-
-print "Scoring..."
+print ("Scoring...")
 s = time.time()
+
 #
 # TODO: score your model on your test set
 #
 # .. your code here ..
-print "Score: ", round(score*100, 3)
-print "Scoring completed in: ", time.time() - s
 
+score = model.score(X_test, y_test)
+print ("Score: ", round(score*100, 3))
+print ("Scoring completed in: ", time.time() - s)
 
+'''
 #
 # TODO: Answer the lab questions, then come back to experiment more
 
