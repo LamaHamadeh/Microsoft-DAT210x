@@ -1,3 +1,7 @@
+'''
+author Lama Hamadeh
+'''
+
 import pandas as pd
 
 # TODO: Load up the 'tutorial.csv' dataset
