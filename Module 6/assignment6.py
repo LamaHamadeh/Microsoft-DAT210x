@@ -72,18 +72,18 @@ X.dropna(axis = 0, how = 'any', inplace = True)
 print(list(X.columns.values)) #print the columns headers of the dataset to know which column to copy
 
 #
-# TODO: Encode your 'y' value as a dummies version/copy version of your dataset's "class" column
+# TODO: Encode your 'y' value as a dummies version of your dataset's "class" column after copying it to y
 #
 # .. your code here ..
 
 y = X['class'].copy()
-
+y = pd.get_dummies(y)
 #
 # TODO: Get rid of the user and class columns
 #
 # .. your code here ..
 
-X.drop(['user','class'], axis = 1, inplace = True)
+X.drop(labels =['user','class'], axis = 1, inplace = True)
 
 print (X.describe())
 
